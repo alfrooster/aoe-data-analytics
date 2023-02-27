@@ -4,3 +4,6 @@ The goals of this project is to analyze the ranked multiplayer match data of the
 These variables consist of match settings, such as map type, player-picked civilization, and other possible determining factors.
 
 The analysis is to be done utilizing Python's Pandas-library.
+
+Some notes to help team: (subject to change)
+1. Specifying the encoding for opening the .CSV-file: df = pd.read_csv(file, encoding='ISO-8859-1')
