@@ -7,3 +7,4 @@ The analysis is to be done utilizing Python's Pandas-library.
 
 Some notes to help team: (subject to change)
 1. Specifying the encoding for opening the .CSV-file: df = pd.read_csv(file, encoding='ISO-8859-1')
+2. Install matplotlib (https://matplotlib.org/stable/users/installing/index.html) to use piecharts and other graphical visualisations
