@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<h1>Template</h1>
+{% endblock %}
+
+{% block body %}
+<div class="sidebar"></div>
+<div class="content">
+    <h1>Here comes the content</h1>
+    {{ res|safe }}
+</div>
+<div class="sidebar" style="left: auto; right: 0;"></div>
+{% endblock %}
