@@ -8,30 +8,9 @@
 <div class="sidebar"></div>
 <div class="content">
     <h1>Here comes the content</h1>
-    <form action="{{ url_for('results') }}" method="POST">
-        <label for="map_list">Choose a map:</label>
-        <select id="map_list" name="aoe2map">
-          {% for aoe2map in map_list %}
-          <option value="{{ aoe2map }}">{{ aoe2map }}</option>
-          {% endfor %}
-       </select>
-       <br>
-       <label for="civ_name_list">Choose your civilization:</label>
-        <select id="civ_name_list" name="player_civ_name">
-          {% for player_civ_name in civ_name_list %}
-          <option value="{{ player_civ_name }}">{{ player_civ_name }}</option>
-          {% endfor %}
-       </select>
-       <br>
-       <label for="civ_name_list">Choose enemy civilization:</label>
-        <select id="civ_name_list" name="enemy_civ_name">
-          {% for enemy_civ_name in civ_name_list %}
-          <option value="{{ enemy_civ_name }}">{{ enemy_civ_name }}</option>
-          {% endfor %}
-       </select>
-       <br>
-       <button type="submit">Submit</button>
-    </form>
+    <a href="stratoptimizer">Formulate a strategy</a>
+    <br>
+    <a href="winrates">Analyze winrates</a>
 </div>
 <div class="sidebar" style="left: auto; right: 0;"></div>
 {% endblock %}
