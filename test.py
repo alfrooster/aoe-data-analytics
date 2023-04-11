@@ -1,14 +1,32 @@
 import pandas as pd
 
 #replace with the location of your csv file
-df = pd.read_csv("YOUR_PATH/aoe2.csv")
+df = pd.read_csv("../aoe2.csv")
 
-def formulate_strat(selected_map, selected_player_civ, selected_enemy_civ, selected_elo_max, selected_elo_min):
+def formulate_strat(selected_map, selected_player_civ, selected_enemy_civ, selected_elo):
 
+    #min and max for each selection
+    if selected_elo == "low":
+        elo_min = 0
+        elo_max = 1000
+        elo_msg = "Low (<1000)"
+    elif selected_elo == "med":
+        elo_min = 1000
+        elo_max = 1300
+        elo_msg = "Medium (1000-1300)"
+    elif selected_elo == "high":
+        elo_min = 1300
+        elo_max = 10000
+        elo_msg = "High (over 1300)"
+    elif selected_elo == "veryhigh":
+        elo_min = 1500
+        elo_max = 10000
+        elo_msg = "Very High (over 1500)"
+    
     #filter to games where elo is higher than user input
-    table = df.loc[df['rating.win'] >= selected_elo_min]
+    table = df.loc[df['rating.win'] >= elo_min]
     #filter to games where elo is lower than user input
-    table = table.loc[df['rating.win'] <= selected_elo_max]
+    table = table.loc[df['rating.win'] <= elo_max]
     #filter to games in chosen map
     table = table.loc[df['map_type.name']  == selected_map]
 
@@ -33,7 +51,7 @@ def formulate_strat(selected_map, selected_player_civ, selected_enemy_civ, selec
     win_percentage = len(player_win_table) / total_games * 100
     win_percentage = round(win_percentage, 2)
 
-    print(f"according to our data of {total_games} games, {selected_player_civ} have a {win_percentage}% chance of winning over {selected_enemy_civ} in the map {selected_map} in games with {selected_elo_min}-{selected_elo_max} elo ranking")
+    print(f"according to our data of {total_games} games, {selected_player_civ} have a {win_percentage}% chance of winning over {selected_enemy_civ} in the map {selected_map} in games with {elo_msg} elo ranking")
 
 def winrates_test():
     #ask user for elo
@@ -65,7 +83,6 @@ def winrates_test():
 selected_map = "Arabia"
 selected_player_civ = "Huns"
 selected_enemy_civ = "Lithuanians"
-selected_elo_max = 1300
-selected_elo_min = 1000
+selected_elo = "low"
 
-formulate_strat(selected_map, selected_player_civ, selected_enemy_civ, selected_elo_max, selected_elo_min)
+formulate_strat(selected_map, selected_player_civ, selected_enemy_civ, selected_elo)
