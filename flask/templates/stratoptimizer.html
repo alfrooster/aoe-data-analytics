@@ -31,6 +31,14 @@
           {% endfor %}
         </select>
         <br>
+        <label for="elo">Choose elo range:</label>
+        <select id="elo" name="elo">
+          <option value="low">Low (<1000)</option>
+          <option value="med">Medium (1000-1300)</option>
+          <option value="high">High (over 1300)</option>
+          <option value="veryhigh">Very High (over 1500)</option>
+        </select>
+        <br>
         <button type="submit">Submit</button>
     </form>
 </div>
