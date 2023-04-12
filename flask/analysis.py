@@ -7,7 +7,7 @@ def formulate_strat(selected_map, selected_player_civ, selected_enemy_civ, selec
     #min and max for each selection
     if selected_elo == "all":
         elo_msg = "any"
-    if selected_elo == "low":
+    elif selected_elo == "low":
         elo_min = 0
         elo_max = 1000
         elo_msg = "Low (<1000)"
@@ -27,6 +27,7 @@ def formulate_strat(selected_map, selected_player_civ, selected_enemy_civ, selec
     #filter to games in chosen map
     table = df.loc[df['map_type.name']  == selected_map]
 
+    #if user chooses all elo ranks, filtering by elo will be skipped
     if selected_elo != "all":
         #filter to games where elo is higher than user input
         table = table.loc[df['rating.win'] >= elo_min]
@@ -46,14 +47,14 @@ def formulate_strat(selected_map, selected_player_civ, selected_enemy_civ, selec
     #calculate total games
     total_games = len(player_win_table) + len(enemy_win_table)
 
+    #calculate win percentage
     if total_games == 0:
         win_percentage = "NO_DATA"
     else:
-        #calculate win percentage
         win_percentage = len(player_win_table) / total_games * 100
         win_percentage = round(win_percentage, 2)
 
-    return(f'According to our data of {total_games} games, {selected_player_civ} have a {win_percentage}% chance of winning over {selected_enemy_civ} in the map "{selected_map}" in {elo_msg} elo ranking.')
+    return(f'According to our data of {total_games} games, the {selected_player_civ} have a {win_percentage}% chance of winning over the {selected_enemy_civ} in the map "{selected_map}" in {elo_msg} elo ranking.')
 
 def analyze_winrates(selected_elo, selected_map, selected_duration):
 
