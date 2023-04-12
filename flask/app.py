@@ -33,13 +33,15 @@ def results():
         selected_map = request.form.get('aoe2map')
         selected_player_civ = request.form.get('player_civ_name')
         selected_enemy_civ = request.form.get('enemy_civ_name')
+        selected_elo = request.form.get('elo')
 
         print(request.form.get('data_from_where'))
         print(selected_map)
         print(selected_player_civ)
         print(selected_enemy_civ)
+        print(selected_elo)
     
-        res = analysis.formulate_strat(selected_map, selected_player_civ, selected_enemy_civ)
+        res = analysis.formulate_strat(selected_map, selected_player_civ, selected_enemy_civ, selected_elo)
         #print(res)
         return render_template('results.html', res=res)
 
