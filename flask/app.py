@@ -12,11 +12,11 @@ nav.Bar('top', [
     nav.Item('WinRates', 'winrates'),
 ])
 
+map_list = ['Acropolis', 'Arabia', 'Arena', 'Atacama', 'Fortress', 'Four Lakes', 'Golden Pit', 'Hideout', 'Islands', 'MegaRandom', 'Migration', 'Nomad']
+civ_name_list = ['Aztecs', 'Berbers', 'Britons', 'Bulgarians', 'Burgundians', 'Burmese', 'Byzantines', 'Celts', 'Chinese', 'Cumans', 'Ethiopians', 'Franks', 'Goths', 'Huns', 'Incas', 'Indians', 'Italians', 'Japanese', 'Khmer', 'Koreans', 'Lithuanians', 'Magyars', 'Malay', 'Malians', 'Mayans', 'Mongols', 'Persians', 'Portuguese', 'Saracens', 'Sicilians', 'Slavs', 'Spanish', 'Tatars', 'Teutons', 'Turks', 'Vietnamese', 'Vikings']
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
-
-    map_list = ['Acropolis', 'Arabia', 'Arena', 'Atacama', 'Fortress', 'Four Lakes', 'Golden Pit', 'Hideout', 'Islands', 'MegaRandom', 'Migration', 'Nomad']
-    civ_name_list = ['Aztecs', 'Berbers', 'Britons', 'Bulgarians', 'Burgundians', 'Burmese', 'Byzantines', 'Celts', 'Chinese', 'Cumans', 'Ethiopians', 'Franks', 'Goths', 'Huns', 'Incas', 'Indians', 'Italians', 'Japanese', 'Khmer', 'Koreans', 'Lithuanians', 'Magyars', 'Malay', 'Malians', 'Mayans', 'Mongols', 'Persians', 'Portuguese', 'Saracens', 'Sicilians', 'Slavs', 'Spanish', 'Tatars', 'Teutons', 'Turks', 'Vietnamese', 'Vikings']
     
     return render_template('index.html', map_list=map_list, civ_name_list=civ_name_list)
 
@@ -27,15 +27,10 @@ def navbar():
 @app.route('/winrates', methods=['GET', 'POST'])
 def winrates():
 
-    map_list = ['Acropolis', 'Arabia', 'Arena', 'Atacama', 'Fortress', 'Four Lakes', 'Golden Pit', 'Hideout', 'Islands', 'MegaRandom', 'Migration', 'Nomad']
-
     return render_template('winrates.html', map_list=map_list)
 
 @app.route('/stratoptimizer', methods=['GET', 'POST'])
 def stratoptimizer():
-
-    map_list = ['Acropolis', 'Arabia', 'Arena', 'Atacama', 'Fortress', 'Four Lakes', 'Golden Pit', 'Hideout', 'Islands', 'MegaRandom', 'Migration', 'Nomad']
-    civ_name_list = ['Aztecs', 'Berbers', 'Britons', 'Bulgarians', 'Burgundians', 'Burmese', 'Byzantines', 'Celts', 'Chinese', 'Cumans', 'Ethiopians', 'Franks', 'Goths', 'Huns', 'Incas', 'Indians', 'Italians', 'Japanese', 'Khmer', 'Koreans', 'Lithuanians', 'Magyars', 'Malay', 'Malians', 'Mayans', 'Mongols', 'Persians', 'Portuguese', 'Saracens', 'Sicilians', 'Slavs', 'Spanish', 'Tatars', 'Teutons', 'Turks', 'Vietnamese', 'Vikings']
     
     return render_template('stratoptimizer.html', map_list=map_list, civ_name_list=civ_name_list)
 
@@ -56,7 +51,7 @@ def results():
     
         res = analysis.formulate_strat(selected_map, selected_player_civ, selected_enemy_civ, selected_elo)
         #print(res)
-        return render_template('results.html', res=res)
+        return render_template('stratoptimizer.html', res=res, map_list=map_list, civ_name_list=civ_name_list)
 
     elif request.method == 'POST' and request.form.get('data_from_where') == 'winrates':
         selected_elo = request.form.get('min_elo')
@@ -70,7 +65,7 @@ def results():
 
         res = analysis.analyze_winrates(selected_elo, selected_map, selected_duration)
 
-        return render_template('results.html', res=res)
+        return render_template('winrates.html', res=res, map_list=map_list, civ_name_list=civ_name_list)
 
 
 if __name__ == "__main__":

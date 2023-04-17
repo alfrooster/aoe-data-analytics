@@ -41,8 +41,8 @@
         <button type="submit">Submit</button>
         <button type="reset" style="margin-left: 5px;">Reset</button><br />
         <button type="button" style="margin-top: 10px" onclick="window.location.href='/';">Back</button>
-
     </form>
+    {{ res|safe }}
 </div>
 <div class="sidebar" style="left: auto; right: 0;"></div>
 {% endblock %}
