@@ -1,6 +1,6 @@
 import pandas as pd
 
-df = pd.read_csv("C:/Users/tiina/Documents/projekti2/aoe-data-analytics/aoe2.csv")
+df = pd.read_csv("../aoe2.csv")
 
 def formulate_strat(selected_map, selected_player_civ, selected_enemy_civ, selected_elo):
 
