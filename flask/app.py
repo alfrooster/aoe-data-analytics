@@ -1,7 +1,16 @@
 from flask import Flask, render_template, request, url_for
+from flask_navigation import Navigation
 import analysis
 
 app = Flask(__name__)
+nav = Navigation(app)
+
+# initializing Navigations
+nav.Bar('top', [
+    nav.Item('Home', 'index'),
+    nav.Item('Strat', 'stratoptimizer'),
+    nav.Item('WinRates', 'winrates'),
+])
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -10,6 +19,10 @@ def index():
     civ_name_list = ['Aztecs', 'Berbers', 'Britons', 'Bulgarians', 'Burgundians', 'Burmese', 'Byzantines', 'Celts', 'Chinese', 'Cumans', 'Ethiopians', 'Franks', 'Goths', 'Huns', 'Incas', 'Indians', 'Italians', 'Japanese', 'Khmer', 'Koreans', 'Lithuanians', 'Magyars', 'Malay', 'Malians', 'Mayans', 'Mongols', 'Persians', 'Portuguese', 'Saracens', 'Sicilians', 'Slavs', 'Spanish', 'Tatars', 'Teutons', 'Turks', 'Vietnamese', 'Vikings']
     
     return render_template('index.html', map_list=map_list, civ_name_list=civ_name_list)
+
+@app.route('/navbar')
+def navbar():
+    return render_template('navbar.html')
 
 @app.route('/winrates', methods=['GET', 'POST'])
 def winrates():
