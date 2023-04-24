@@ -15,40 +15,44 @@
         
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-            {% for item in nav.top %}
-                <li class="nav-item {{ 'active' if item.is_active else '' }}">
-                    <a class="nav-link" href="{{ item.url }}">{{ item.label }}</a>
-                </li>
-            {% endfor %}
         </div>
     </nav>
     <h1>Top civilizations by winrate</h1>
-    <form action="{{ url_for('results') }}" method="POST">
-        <input type="hidden" id="data_from_where" name="data_from_where" value="winrates">
-        <label for="elo">Choose elo range:</label>
-        <select id="elo" name="elo">
-          <option value="all">All</option>
-          <option value="low">Low (<1000)</option>
-          <option value="med">Medium (1000-1300)</option>
-          <option value="high">High (over 1300)</option>
-          <option value="veryhigh">Very High (over 1500)</option>
-        </select>
-        <br>
-        <label for="map_list">Choose a map:</label>
-        <select id="map_list" name="aoe2map">
-            {% for aoe2map in map_list %}
-            <option value="{{ aoe2map }}">{{ aoe2map }}</option>
-            {% endfor %}
-        </select>
-        <br>
-        <label for="duration">Input maximum match duration: (HH:MM:SS)</label>
-        <input type="text" id="duration" name="duration">
-        <br>
-        <button type="submit">Submit</button>
-        <button type="reset" style="margin-left: 5px;">Reset</button><br />
-        <button type="button" style="margin-top: 10px" onclick="window.location.href='/';">Back</button>
-    </form>
-    {{ res|safe }}
+    <div class="form-box">
+        <form action="{{ url_for('results') }}" method="POST">
+            <input type="hidden" id="data_from_where" name="data_from_where" value="winrates">
+            <label class="input-label" for="elo">Choose elo range:</label>
+            <select class="input-area" id="elo" name="elo">
+                <option value="all">All</option>
+                <option value="low">Low (<1000)</option>
+                <option value="med">Medium (1000-1300)</option>
+                <option value="high">High (over 1300)</option>
+                <option value="veryhigh">Very High (over 1500)</option>
+            </select>
+            <br>
+            <label class="input-label" for="map_list">Choose a map:</label>
+            <select class="input-area" id="map_list" name="aoe2map">
+                {% for aoe2map in map_list %}
+                <option value="{{ aoe2map }}">{{ aoe2map }}</option>
+                {% endfor %}
+            </select>
+            <br>
+            <label class="input-label" for="duration">Input maximum match duration: (HH:MM:SS)</label>
+            <input class="input-area" type="text" id="duration" name="duration">
+            <br>
+            <button type="submit">Submit</button>
+            <button type="reset" style="margin-left: 5px;">Reset</button><br />
+            <button type="button" style="margin-top: 10px" onclick="window.location.href='/';">Back</button>
+        </form>
+    </div>
+    {% if res %}
+        <h3>Top civilizations in "{{res['selected_map']}}" in {{res['elo_msg']}} ranking</h3>
+        <p>data of {{res['total_games']}} games</p>
+    {% endif %}
+    {{ res['table']|safe }}
+    {% if res %}
+    <img src={{url}} alt="Chart" height="auto" width="100%">
+    {% endif %}
 </div>
 <div class="sidebar" style="left: auto; right: 0;"></div>
 {% endblock %}
