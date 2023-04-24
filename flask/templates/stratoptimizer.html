@@ -58,7 +58,15 @@
     </div>
     
     {% if res %}
-      According to our data of {{res['total_games']}} games, the {{res['selected_player_civ']}} have a {{res['win_percentage']}}% chance of winning over the {{res['selected_enemy_civ']}} in the map "{{res['selected_map']}}" in {{res['elo_msg']}} elo ranking.
+    <p>The {{res['selected_player_civ']}} have a {{res['win_percentage']}} % chance of winning over the {{res['selected_enemy_civ']}} in the map "{{res['selected_map']}}" in {{res['elo_msg']}} elo ranking.</p>
+    <ul>
+      <li><b>Winrate: </b>{{res['win_percentage']}} %</li>
+      <li><b>Player civilization: </b>{{res['selected_player_civ']}}</li>
+      <li><b>Opponent civilization: </b>{{res['selected_enemy_civ']}}</li>
+      <li><b>Map: </b>{{res['selected_map']}}</li>
+      <li><b>Ranking: </b>{{res['elo_msg']}}</li>
+    </ul>
+    <p>Data consists of {{res['total_games']}} games.</p>
     {% endif %}
   </div>
 <div class="sidebar" style="left: auto; right: 0;"></div>
