@@ -32,3 +32,17 @@ table.dataframe th {
     background-color: white;
     height: 100vh;
 }
+.form-box {
+    background-color: bisque;
+    vertical-align:auto;
+    padding: 5%;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+.input-label {
+
+}
+.input-area {
+    float: right;
+    width: 250px;
+}

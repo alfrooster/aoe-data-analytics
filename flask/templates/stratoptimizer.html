@@ -6,33 +6,61 @@
 
 {% block body %}
 <div class="sidebar"></div>
-<div class="content">
-    <h1>Here comes the content</h1>
-    <form action="{{ url_for('results') }}" method="POST">
+  <div class="content">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="index.html">AoE2 Stats</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+      </button>
+      
+    </nav>
+    <h1>StratOptimizer</h1>
+    <div class="form-box">
+      <form action="{{ url_for('results') }}" method="POST">
         <input type="hidden" id="data_from_where" name="data_from_where" value="stratoptimizer">
-        <label for="map_list">Choose a map:</label>
-        <select id="map_list" name="aoe2map">
+        <label class="input-label for="map_list">Choose a map:</label>
+        <select class="input-area" id="map_list" name="aoe2map">
           {% for aoe2map in map_list %}
           <option value="{{ aoe2map }}">{{ aoe2map }}</option>
           {% endfor %}
         </select>
         <br>
-        <label for="civ_name_list">Choose your civilization:</label>
-        <select id="civ_name_list" name="player_civ_name">
+
+        <label class="input-label for="civ_name_list">Choose your civilization:</label>
+        <select class="input-area" id="civ_name_list" name="player_civ_name">
           {% for player_civ_name in civ_name_list %}
           <option value="{{ player_civ_name }}">{{ player_civ_name }}</option>
           {% endfor %}
         </select>
         <br>
-        <label for="civ_name_list">Choose enemy civilization:</label>
-        <select id="civ_name_list" name="enemy_civ_name">
+        
+        <label class="input-label for="civ_name_list">Choose enemy civilization:</label>
+        <select class="input-area" id="civ_name_list" name="enemy_civ_name">
           {% for enemy_civ_name in civ_name_list %}
           <option value="{{ enemy_civ_name }}">{{ enemy_civ_name }}</option>
           {% endfor %}
         </select>
         <br>
+
+        <label class="input-label for="elo">Choose elo range:</label>
+        <select class="input-area" id="elo" name="elo">
+          <option value="all">All</option>
+          <option value="low">Low (<1000)</option>
+          <option value="med">Medium (1000-1300)</option>
+          <option value="high">High (over 1300)</option>
+          <option value="veryhigh">Very High (over 1500)</option>
+        </select>
+        <br>
+
         <button type="submit">Submit</button>
+        <button type="reset" style="margin-left: 5px;">Reset</button><br />
+        <button type="button" style="margin-top: 10px" onclick="window.location.href='/';">Back</button>
     </form>
-</div>
+    </div>
+    
+    {% if res %}
+      According to our data of {{res['total_games']}} games, the {{res['selected_player_civ']}} have a {{res['win_percentage']}}% chance of winning over the {{res['selected_enemy_civ']}} in the map "{{res['selected_map']}}" in {{res['elo_msg']}} elo ranking.
+    {% endif %}
+  </div>
 <div class="sidebar" style="left: auto; right: 0;"></div>
 {% endblock %}
