@@ -48,9 +48,7 @@
     {% if res %}
         <h3>Top civilizations in "{{res['selected_map']}}" in {{res['elo_msg']}} ranking</h3>
         <p>data of {{res['total_games']}} games</p>
-    {% endif %}
     {{ res['table']|safe }}
-    {% if res %}
     <img src={{url}} alt="Chart" height="auto" width="100%">
     {% endif %}
 </div>
