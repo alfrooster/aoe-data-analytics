@@ -54,7 +54,7 @@ def results():
         return render_template('stratoptimizer.html', res=res, map_list=map_list, civ_name_list=civ_name_list)
 
     elif request.method == 'POST' and request.form.get('data_from_where') == 'winrates':
-        selected_elo = request.form.get('min_elo')
+        selected_elo = request.form.get('elo')
         selected_map = request.form.get('aoe2map')
         selected_duration = request.form.get('duration')
 
