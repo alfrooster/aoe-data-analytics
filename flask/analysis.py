@@ -61,7 +61,7 @@ def formulate_strat(selected_map, selected_player_civ, selected_enemy_civ, selec
     return return_object
     #return(f'According to our data of {total_games} games, the {selected_player_civ} have a {win_percentage}% chance of winning over the {selected_enemy_civ} in the map "{selected_map}" in {elo_msg} elo ranking.')
 
-def analyze_winrates(selected_elo, selected_map, selected_duration):
+def analyze_winrates(selected_elo, selected_map, selected_fromduration, selected_toduration):
 
     #min and max for each selection
     if selected_elo == "all":
@@ -75,6 +75,17 @@ def analyze_winrates(selected_elo, selected_map, selected_duration):
     elif selected_elo == "veryhigh":
         elo_min, elo_max, elo_msg =     1500,  10000,  "Very High (1500 or higher)"
 
+    if int(selected_fromduration) <= 0:
+        min_dura = "00:00:00"
+    elif int(selected_fromduration) <= 5 and int(selected_fromduration) > 0:
+        min_dura = "00:05:00"
+    elif int(selected_fromduration) >= 10:
+        min_dura = f"00:{selected_fromduration}:00"
+    if int(selected_toduration) <= 60 and int(selected_toduration) >= 0:
+        max_dura = f"00:{selected_toduration}:00"
+    elif selected_toduration > 60:
+        max_dura = "99:99:99"
+
     #filter to games in chosen map
     table = df.loc[df['map_type.name']  == selected_map]
 
@@ -86,7 +97,8 @@ def analyze_winrates(selected_elo, selected_map, selected_duration):
         table = table.loc[df['rating.win'] < elo_max]
 
     #filter by duration
-    table = table.loc[table['duration'] < selected_duration]
+    table = table.loc[table['duration'] >= min_dura]
+    table = table.loc[table['duration'] < max_dura]
 
     #calculate total games
     total_games = len(table)
@@ -110,6 +122,8 @@ def analyze_winrates(selected_elo, selected_map, selected_duration):
         "table": winrate_table.head(5).to_html(), #top 5 civs
         "total_games": total_games,
         "selected_map": selected_map,
+        "min_dura": min_dura,
+        "max_dura": max_dura,
         "elo_msg": elo_msg
     }
 

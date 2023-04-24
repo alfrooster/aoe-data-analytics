@@ -37,8 +37,23 @@
                 {% endfor %}
             </select>
             <br>
-            <label class="input-label" for="duration">Input maximum match duration: (HH:MM:SS)</label>
-            <input class="input-area" type="text" id="duration" name="duration">
+            <label class="input-label">Choose match duration (min):</label>
+            <div class="range_container">
+                <div class="sliders_control">
+                    <input name="fromDuration" id="fromSlider" type="range" value="0" min="0" max="60" step="5"/>
+                    <input name="toDuration" id="toSlider" type="range" value="60" min="0" max="65" step="5"/>
+                </div>
+                <div class="form_control">
+                    <div class="form_control_container">
+                        <div class="form_control_container__time">Min</div>
+                        <input class="form_control_container__time__input" type="number" id="fromInput" value="0" min="0" max="60" step="5"/>
+                    </div>
+                    <div class="form_control_container">
+                        <div class="form_control_container__time">Max</div>
+                        <input class="form_control_container__time__input" type="number" id="toInput" value="60" min="0" max="65" step="5"/>
+                    </div>
+                </div>
+            </div>
             <br>
             <button type="submit">Submit</button>
             <button type="reset" style="margin-left: 5px;">Reset</button><br />
@@ -46,11 +61,103 @@
         </form>
     </div>
     {% if res %}
-        <h3>Top civilizations in "{{res['selected_map']}}" in {{res['elo_msg']}} ranking</h3>
-        <p>data of {{res['total_games']}} games</p>
+        <h3>Top civilizations in {{res['selected_map']}}</h3>
+        <p><b>Ranking: </b>{{res['elo_msg']}}</p>
+        <p><b>Duration: </b>{{res['min_dura']}} - {{res['max_dura']}}</p>
+        <p>Data consists of {{res['total_games']}} games.</p>
     {{ res['table']|safe }}
     <img src={{url}} alt="Chart" height="auto" width="100%">
     {% endif %}
 </div>
 <div class="sidebar" style="left: auto; right: 0;"></div>
+<script>
+    //https://medium.com/@predragdavidovic10/native-dual-range-slider-html-css-javascript-91e778134816
+    function controlFromInput(fromSlider, fromInput, toInput, controlSlider) {
+        const [from, to] = getParsed(fromInput, toInput);
+        fillSlider(fromInput, toInput, '#C6C6C6', '#c1791c', controlSlider);
+        if (from > to) {
+            fromSlider.value = to;
+            fromInput.value = to;
+        } else {
+            fromSlider.value = from;
+        }
+    }
+        
+    function controlToInput(toSlider, fromInput, toInput, controlSlider) {
+        const [from, to] = getParsed(fromInput, toInput);
+        fillSlider(fromInput, toInput, '#C6C6C6', '#c1791c', controlSlider);
+        setToggleAccessible(toInput);
+        if (from <= to) {
+            toSlider.value = to;
+            toInput.value = to;
+        } else {
+            toInput.value = from;
+        }
+    }
+
+    function controlFromSlider(fromSlider, toSlider, fromInput) {
+    const [from, to] = getParsed(fromSlider, toSlider);
+    fillSlider(fromSlider, toSlider, '#C6C6C6', '#c1791c', toSlider);
+    if (from > to) {
+        fromSlider.value = to;
+        fromInput.value = to;
+    } else {
+        fromInput.value = from;
+    }
+    }
+
+    function controlToSlider(fromSlider, toSlider, toInput) {
+    const [from, to] = getParsed(fromSlider, toSlider);
+    fillSlider(fromSlider, toSlider, '#C6C6C6', '#c1791c', toSlider);
+    setToggleAccessible(toSlider);
+    if (from <= to) {
+        toSlider.value = to;
+        toInput.value = to;
+    } else {
+        toInput.value = from;
+        toSlider.value = from;
+    }
+    }
+
+    function getParsed(currentFrom, currentTo) {
+    const from = parseInt(currentFrom.value, 10);
+    const to = parseInt(currentTo.value, 10);
+    return [from, to];
+    }
+
+    function fillSlider(from, to, sliderColor, rangeColor, controlSlider) {
+        const rangeDistance = to.max-to.min;
+        const fromPosition = from.value - to.min;
+        const toPosition = to.value - to.min;
+        controlSlider.style.background = `linear-gradient(
+        to right,
+        ${sliderColor} 0%,
+        ${sliderColor} ${(fromPosition)/(rangeDistance)*100}%,
+        ${rangeColor} ${((fromPosition)/(rangeDistance))*100}%,
+        ${rangeColor} ${(toPosition)/(rangeDistance)*100}%, 
+        ${sliderColor} ${(toPosition)/(rangeDistance)*100}%, 
+        ${sliderColor} 100%)`;
+    }
+
+    function setToggleAccessible(currentTarget) {
+    const toSlider = document.querySelector('#toSlider');
+    if (Number(currentTarget.value) <= 0 ) {
+        toSlider.style.zIndex = 2;
+    } else {
+        toSlider.style.zIndex = 0;
+    }
+    }
+
+    const fromSlider = document.querySelector('#fromSlider');
+    const toSlider = document.querySelector('#toSlider');
+    const fromInput = document.querySelector('#fromInput');
+    const toInput = document.querySelector('#toInput');
+    fillSlider(fromSlider, toSlider, '#C6C6C6', '#c1791c', toSlider);
+    setToggleAccessible(toSlider);
+
+    fromSlider.oninput = () => controlFromSlider(fromSlider, toSlider, fromInput);
+    toSlider.oninput = () => controlToSlider(fromSlider, toSlider, toInput);
+    fromInput.oninput = () => controlFromInput(fromSlider, fromInput, toInput, toSlider);
+    toInput.oninput = () => controlToInput(toSlider, fromInput, toInput, toSlider);
+</script>
 {% endblock %}

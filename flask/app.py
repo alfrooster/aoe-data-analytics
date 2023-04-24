@@ -48,9 +48,10 @@ def results():
 
     elif address_path == 'winrates':
         selected_elo = request.form.get('elo')
-        selected_duration = request.form.get('duration')
+        selected_fromduration = request.form.get('fromDuration')
+        selected_toduration = request.form.get('toDuration')
 
-        res = analysis.analyze_winrates(selected_elo, selected_map, selected_duration)
+        res = analysis.analyze_winrates(selected_elo, selected_map, selected_fromduration, selected_toduration)
     
     else:
         # returns forbidden http code
