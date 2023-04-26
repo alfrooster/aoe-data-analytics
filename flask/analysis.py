@@ -1,9 +1,10 @@
 import pandas as pd
 import base64
 from io import BytesIO
+# from matplotlib.figure import Figure
 from matplotlib import pyplot as plt
 
-df = pd.read_csv("./aoe2.csv")
+df = pd.read_csv("../aoe2.csv")
 
 def formulate_strat(selected_map, selected_player_civ, selected_enemy_civ, selected_elo):
 
@@ -59,7 +60,6 @@ def formulate_strat(selected_map, selected_player_civ, selected_enemy_civ, selec
     }
 
     return return_object
-    #return(f'According to our data of {total_games} games, the {selected_player_civ} have a {win_percentage}% chance of winning over the {selected_enemy_civ} in the map "{selected_map}" in {elo_msg} elo ranking.')
 
 def analyze_winrates(selected_elo, selected_map, selected_fromduration, selected_toduration):
 
@@ -116,7 +116,7 @@ def analyze_winrates(selected_elo, selected_map, selected_fromduration, selected
     ax = fig.subplots()
     plt.bar(winrate_table.civs.iloc[0:5], winrate_table.win_rate.iloc[0:5])
     ax.set(ylim=[49, 100])
-    fig.savefig('./flask/static/images/plot.png')
+    fig.savefig('./static/images/plot.png')
 
     return_object = {
         "table": winrate_table.head(5).to_html(), #top 5 civs

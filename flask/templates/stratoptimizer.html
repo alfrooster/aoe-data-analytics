@@ -8,17 +8,40 @@
 <div class="sidebar"></div>
   <div class="content">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="index.html">AoE2 Stats</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-      </button>
+      <div class="navbar-wrapper">
+          <div class="navbar-box">
+              <a class="navbar-brand" href="/">AoE2 Stats</a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+          </div>
+          <div class="navbar-box">
+              <a class="navbar-nav" href="/winrates">Analyze Winrates</a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+          </div>
+          <div class="navbar-box">
+              <a class="navbar-nav" href="/stratoptimizer">Optimize strategy</a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+              </button>
+          </div>
+      </div>
       
+      
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+
+      </div>
     </nav>
+    
     <h1>StratOptimizer</h1>
+
     <div class="form-box">
       <form action="{{ url_for('results') }}" method="POST">
         <input type="hidden" id="data_from_where" name="data_from_where" value="stratoptimizer">
-        <label class="input-label" for="map_list">Choose a map:</label>
+        <label class="input-label for="map_list">Choose a map:</label>
         <select class="input-area" id="map_list" name="aoe2map">
           {% for aoe2map in map_list %}
           <option value="{{ aoe2map }}">{{ aoe2map }}</option>
@@ -26,7 +49,7 @@
         </select>
         <br>
 
-        <label class="input-label" for="civ_name_list">Choose your civilization:</label>
+        <label class="input-label for="civ_name_list">Choose your civilization:</label>
         <select class="input-area" id="civ_name_list" name="player_civ_name">
           {% for player_civ_name in civ_name_list %}
           <option value="{{ player_civ_name }}">{{ player_civ_name }}</option>
@@ -34,7 +57,7 @@
         </select>
         <br>
         
-        <label class="input-label" for="civ_name_list">Choose enemy civilization:</label>
+        <label class="input-label for="civ_name_list">Choose enemy civilization:</label>
         <select class="input-area" id="civ_name_list" name="enemy_civ_name">
           {% for enemy_civ_name in civ_name_list %}
           <option value="{{ enemy_civ_name }}">{{ enemy_civ_name }}</option>
@@ -42,7 +65,7 @@
         </select>
         <br>
 
-        <label class="input-label" for="elo">Choose elo range:</label>
+        <label class="input-label for="elo">Choose elo range:</label>
         <select class="input-area" id="elo" name="elo">
           <option value="all">All</option>
           <option value="low">Low (<1000)</option>
@@ -51,23 +74,30 @@
           <option value="veryhigh">Very High (over 1500)</option>
         </select>
         <br>
-        <button type="submit">Submit</button>
-        <button type="reset" style="margin-left: 5px;">Reset</button><br />
-        <button type="button" style="margin-top: 10px" onclick="window.location.href='/';">Back</button>
-    </form>
+
+        <div class="button-wrapper">
+          <div class="button-wrapper-box">
+              <button class="button-submit" type="submit">Submit</button>
+          </div>
+          <div class="button-wrapper-box">
+              <button class="button-reset" type="reset">Reset</button><br />
+          </div>
+        </div>
+
+      </form>
     </div>
-    
-    {% if res %}
-    <p>The {{res['selected_player_civ']}} have a {{res['win_percentage']}} % chance of winning over the {{res['selected_enemy_civ']}} in the map "{{res['selected_map']}}" in {{res['elo_msg']}} elo ranking.</p>
-    <ul>
-      <li><b>Winrate: </b>{{res['win_percentage']}} %</li>
-      <li><b>Player civilization: </b>{{res['selected_player_civ']}}</li>
-      <li><b>Opponent civilization: </b>{{res['selected_enemy_civ']}}</li>
-      <li><b>Map: </b>{{res['selected_map']}}</li>
-      <li><b>Ranking: </b>{{res['elo_msg']}}</li>
-    </ul>
-    <p>Data consists of {{res['total_games']}} games.</p>
-    {% endif %}
+    <div>
+      {% if res %}
+      <p>The {{res['selected_player_civ']}} have a {{res['win_percentage']}} % chance of winning over the {{res['selected_enemy_civ']}} in the map "{{res['selected_map']}}" in {{res['elo_msg']}} elo ranking.</p>
+      <ul>
+        <li><b>Winrate: </b>{{res['win_percentage']}} %</li>
+        <li><b>Player civilization: </b>{{res['selected_player_civ']}}</li>
+        <li><b>Opponent civilization: </b>{{res['selected_enemy_civ']}}</li>
+        <li><b>Map: </b>{{res['selected_map']}}</li>
+        <li><b>Ranking: </b>{{res['elo_msg']}}</li>
+      </ul>
+      <p>Data consists of {{res['total_games']}} games.</p>
+      {% endif %}
   </div>
 <div class="sidebar" style="left: auto; right: 0;"></div>
 {% endblock %}

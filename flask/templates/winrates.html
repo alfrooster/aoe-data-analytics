@@ -8,16 +8,36 @@
 <div class="sidebar"></div>
 <div class="content">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand">AoE2 Stats</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+        <div class="navbar-wrapper">
+            <div class="navbar-box">
+                <a class="navbar-brand" href="/">AoE2 Stats</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            <div class="navbar-box">
+                <a class="navbar-nav" href="/winrates">Analyze Winrates</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            <div class="navbar-box">
+                <a class="navbar-nav" href="/stratoptimizer">Optimize strategy</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+        </div>
+        
         
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
+
         </div>
     </nav>
+
     <h1>Top civilizations by winrate</h1>
+
     <div class="form-box">
         <form action="{{ url_for('results') }}" method="POST">
             <input type="hidden" id="data_from_where" name="data_from_where" value="winrates">
@@ -54,10 +74,15 @@
                     </div>
                 </div>
             </div>
-            <br>
-            <button type="submit">Submit</button>
-            <button type="reset" style="margin-left: 5px;">Reset</button><br />
-            <button type="button" style="margin-top: 10px" onclick="window.location.href='/';">Back</button>
+            <br><br><br><br> <!-- this is not good practice but can be fixed later on -->
+            <div class="button-wrapper">
+                <div class="button-wrapper-box">
+                    <button class="button-submit" type="submit">Submit</button>
+                </div>
+                <div class="button-wrapper-box">
+                    <button class="button-reset" type="reset">Reset</button><br />
+                </div>
+            </div>
         </form>
     </div>
     {% if res %}
@@ -65,8 +90,8 @@
         <p><b>Ranking: </b>{{res['elo_msg']}}</p>
         <p><b>Duration: </b>{{res['min_dura']}} - {{res['max_dura']}}</p>
         <p>Data consists of {{res['total_games']}} games.</p>
-    {{ res['table']|safe }}
-    <img src={{url}} alt="Chart" height="auto" width="100%">
+        {{ res['table']|safe }}
+        <img src={{url}} alt="Chart" height="auto" width="100%">
     {% endif %}
 </div>
 <div class="sidebar" style="left: auto; right: 0;"></div>

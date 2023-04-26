@@ -1,16 +1,7 @@
 from flask import Flask, render_template, request, url_for
-from flask_navigation import Navigation
 import analysis
 
 app = Flask(__name__)
-nav = Navigation(app)
-
-# initializing Navigations
-nav.Bar('top', [
-    nav.Item('Home', 'index'),
-    nav.Item('Strat', 'stratoptimizer'),
-    nav.Item('WinRates', 'winrates'),
-])
 
 map_list = ['Acropolis', 'Arabia', 'Arena', 'Atacama', 'Fortress', 'Four Lakes', 'Golden Pit', 'Hideout', 'Islands', 'MegaRandom', 'Migration', 'Nomad']
 civ_name_list = ['Aztecs', 'Berbers', 'Britons', 'Bulgarians', 'Burgundians', 'Burmese', 'Byzantines', 'Celts', 'Chinese', 'Cumans', 'Ethiopians', 'Franks', 'Goths', 'Huns', 'Incas', 'Indians', 'Italians', 'Japanese', 'Khmer', 'Koreans', 'Lithuanians', 'Magyars', 'Malay', 'Malians', 'Mayans', 'Mongols', 'Persians', 'Portuguese', 'Saracens', 'Sicilians', 'Slavs', 'Spanish', 'Tatars', 'Teutons', 'Turks', 'Vietnamese', 'Vikings']
