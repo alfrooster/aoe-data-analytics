@@ -3,6 +3,7 @@ import base64
 from io import BytesIO
 # from matplotlib.figure import Figure
 from matplotlib import pyplot as plt
+from matplotlib.figure import Figure
 
 df = pd.read_csv("../aoe2.csv")
 
@@ -46,9 +47,18 @@ def formulate_strat(selected_map, selected_player_civ, selected_enemy_civ, selec
     #calculate win percentage
     if total_games == 0:
         win_percentage = "NO_DATA"
+        pie_data = [50, 50]
     else:
         win_percentage = len(player_win_table) / total_games * 100
         win_percentage = round(win_percentage, 2)
+        pie_data = [win_percentage, 100 - win_percentage]
+
+    civs = [selected_player_civ, selected_enemy_civ]
+
+    fig = Figure()
+    ax = fig.subplots()
+    ax.pie(pie_data, labels=civs, autopct='%.1f%%')
+    fig.savefig('./static/images/plot.png')
 
     return_object = {
         "total_games": total_games,
@@ -83,7 +93,7 @@ def analyze_winrates(selected_elo, selected_map, selected_fromduration, selected
         min_dura = f"00:{selected_fromduration}:00"
     if int(selected_toduration) <= 60 and int(selected_toduration) >= 0:
         max_dura = f"00:{selected_toduration}:00"
-    elif selected_toduration > 60:
+    elif int(selected_toduration) > 60:
         max_dura = "99:99:99"
 
     #filter to games in chosen map
