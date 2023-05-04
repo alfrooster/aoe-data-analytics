@@ -16,5 +16,6 @@ Our app can also be used to see a list of the best civilizations in a specific m
 1. Clone the repository
 2. Install virtual environment [pip3 install virtualenv]
 3. Setup virtual environment [python -m venv venv]
-4. Install requirements [pip install -r requirements.txt]
-5. Launch app [python app.py]
+4. Activate virtual environment [venv\Scripts\activate]
+5. Install requirements [pip install -r requirements.txt]
+6. Launch app [python app.py]
