@@ -13,4 +13,8 @@ The player goes into a match. They choose the map. They match up with another pl
 Our app can also be used to see a list of the best civilizations in a specific map. You can also specify the search by choosing the skill level (elo) and the match duration in case you would like to see if different civilizations have different win percentages in longer or shorter matches.
 
 ## Installation
-Clone the repository
+1. Clone the repository
+2. Install virtual environment [pip3 install virtualenv]
+3. Setup virtual environment [python -m venv venv]
+4. Install requirements [pip install -r requirements.txt]
+5. Launch app [python app.py]
