@@ -1,13 +1,16 @@
-# aoe-data-analytics
+# Age of Empires 2 - Data-analysis
 
 The goals of this project is to analyze the ranked multiplayer match data of the video game Age of Empires 2, and see if there are reasonable conclusions to be made on which variables affect the chances of victory.
 These variables consist of match settings, such as map type, player-picked civilization, and other possible determining factors.
 
-The analysis is to be done utilizing Python's Pandas-library.
+The analysis is to be done utilizing Python's Pandas-library. We also used matplotlib to draw charts in the results.
 
-Some notes to help team: (subject to change)
+The data we used is from: https://www.kaggle.com/datasets/slappdun/35000-age-of-empires-2-1v1-ranked-random-matches
 
-1. Install Pandas (https://pandas.pydata.org/docs/getting_started/install.html)
-2. Install matplotlib (https://matplotlib.org/stable/users/installing/index.html) to use piecharts and other graphical visualisations
-3. Specifying the encoding for opening the .CSV-file: df = pd.read_csv(file, encoding='ISO-8859-1')
+## Usage
+The player goes into a match. They choose the map. They match up with another player and they get random civilizations. The player can then use our app to see their chance of winning. From our app they choose the map, their civilization, their opponents civilization and their skill level, the elo rank. The app then gives them the chance of winning as a percentage based on our data.
 
+Our app can also be used to see a list of the best civilizations in a specific map. You can also specify the search by choosing the skill level (elo) and the match duration in case you would like to see if different civilizations have different win percentages in longer or shorter matches.
+
+## Installation
+Clone the repository
