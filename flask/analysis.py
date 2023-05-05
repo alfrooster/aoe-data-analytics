@@ -116,17 +116,21 @@ def analyze_winrates(selected_elo, selected_map, selected_fromduration, selected
     #wins with civ / all games with civ
     winrate_table = table['civ.win.name'].value_counts()/(table['civ.win.name'].value_counts()+table['civ.lose.name'].value_counts())
     #sort winrates and name columns
-    winrate_table = winrate_table.sort_values(ascending = False).reset_index().rename(columns={'index':'civilizations',0:'wins'})
+    winrate_table = winrate_table.sort_values(ascending = False).reset_index().rename(columns={'index':'civs',0:'win_rate'})
+
     #winrate to percentage
-    winrate_table.wins = round(winrate_table.wins * 100, 2)
+    winrate_table.win_rate = round(winrate_table.win_rate * 100, 2)
     #index starts from 1
     winrate_table.index += 1
 
     fig = plt.figure(figsize= (10, 7))
     ax = fig.subplots()
-    plt.bar(winrate_table.civilizations.iloc[0:5], winrate_table.wins.iloc[0:5])
+    plt.bar(winrate_table.civs.iloc[0:5], winrate_table.win_rate.iloc[0:5])
     ax.set(ylim=[49, 100])
     fig.savefig('./flask/static/images/plot.png')
+
+    winrate_table.columns = winrate_table.columns.str.replace('civs', "Civilizations")
+    winrate_table.columns = winrate_table.columns.str.replace('win_rate', "Win Percentage")
 
     return_object = {
         "table": winrate_table.head(5).to_html(), #top 5 civs
