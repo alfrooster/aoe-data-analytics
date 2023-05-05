@@ -12,6 +12,9 @@ The player goes into a match. They choose the map. They match up with another pl
 
 Our app can also be used to see a list of the best civilizations in a specific map. You can also specify the search by choosing the skill level (elo) and the match duration in case you would like to see if different civilizations have different win percentages in longer or shorter matches.
 
+## The app is deployed to render.com
+https://aoe2-data-analytics.onrender.com/
+
 ## Installation
 1. Clone the repository
 2. Install virtual environment `pip3 install virtualenv`
