@@ -127,7 +127,7 @@ def analyze_winrates(selected_elo, selected_map, selected_fromduration, selected
     ax = fig.subplots()
     plt.bar(winrate_table.civs.iloc[0:5], winrate_table.win_rate.iloc[0:5])
     ax.set(ylim=[49, 100])
-    fig.savefig('./flask/static/images/plot.png')
+    fig.savefig('./static/images/plot.png')
 
     winrate_table.columns = winrate_table.columns.str.replace('civs', "Civilizations")
     winrate_table.columns = winrate_table.columns.str.replace('win_rate', "Win Percentage")
