@@ -36,12 +36,12 @@
       </div>
     </nav>
     
-    <h1>StratOptimizer</h1>
+    <h1>Strategy Optimizer</h1>
 
     <div class="form-box">
       <form action="{{ url_for('results') }}" method="POST">
         <input type="hidden" id="data_from_where" name="data_from_where" value="stratoptimizer">
-        <label class="input-label for="map_list">Choose a map:</label>
+        <label class="input-label" for="map_list">Choose a map:</label>
         <select class="input-area" id="map_list" name="aoe2map">
           {% for aoe2map in map_list %}
           <option value="{{ aoe2map }}">{{ aoe2map }}</option>
@@ -65,7 +65,7 @@
         </select>
         <br>
 
-        <label class="input-label for="elo">Choose elo range:</label>
+        <label class="input-label" for="elo">Choose elo range:</label>
         <select class="input-area" id="elo" name="elo">
           <option value="all">All</option>
           <option value="low">Low (<1000)</option>
