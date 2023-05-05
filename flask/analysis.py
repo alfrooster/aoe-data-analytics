@@ -5,7 +5,7 @@ from io import BytesIO
 from matplotlib import pyplot as plt
 from matplotlib.figure import Figure
 
-df = pd.read_csv("../aoe2.csv")
+df = pd.read_csv("./aoe2.csv")
 
 def formulate_strat(selected_map, selected_player_civ, selected_enemy_civ, selected_elo):
 
@@ -58,7 +58,7 @@ def formulate_strat(selected_map, selected_player_civ, selected_enemy_civ, selec
     fig = Figure()
     ax = fig.subplots()
     ax.pie(pie_data, labels=civs, autopct='%.1f%%')
-    fig.savefig('./static/images/plot.png')
+    fig.savefig('./flask/static/images/plot.png')
 
     return_object = {
         "total_games": total_games,
@@ -126,7 +126,7 @@ def analyze_winrates(selected_elo, selected_map, selected_fromduration, selected
     ax = fig.subplots()
     plt.bar(winrate_table.civs.iloc[0:5], winrate_table.win_rate.iloc[0:5])
     ax.set(ylim=[49, 100])
-    fig.savefig('./static/images/plot.png')
+    fig.savefig('./flask/static/images/plot.png')
 
     return_object = {
         "table": winrate_table.head(5).to_html(), #top 5 civs
