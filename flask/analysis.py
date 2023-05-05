@@ -5,7 +5,7 @@ from io import BytesIO
 from matplotlib import pyplot as plt
 from matplotlib.figure import Figure
 
-df = pd.read_csv("./aoe2.csv")
+df = pd.read_csv("../aoe2.csv")
 
 def formulate_strat(selected_map, selected_player_civ, selected_enemy_civ, selected_elo):
 
@@ -58,7 +58,7 @@ def formulate_strat(selected_map, selected_player_civ, selected_enemy_civ, selec
     fig = Figure()
     ax = fig.subplots()
     ax.pie(pie_data, labels=civs, autopct='%.1f%%')
-    fig.savefig('./flask/static/images/plot.png')
+    fig.savefig('./static/images/plot.png')
 
     return_object = {
         "total_games": total_games,
