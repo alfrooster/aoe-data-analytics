@@ -3,7 +3,7 @@
 The goals of this project is to analyze the ranked multiplayer match data of the video game Age of Empires 2, and see if there are reasonable conclusions to be made on which variables affect the chances of victory.
 These variables consist of match settings, such as map type, player-picked civilization, and other possible determining factors.
 
-The analysis is to be done utilizing Python's Pandas-library. We also used matplotlib to draw charts in the results.
+The analysis was done utilizing Python's [pandas](https://pandas.pydata.org/)-library. We also used [matplotlib](https://matplotlib.org/) to draw charts in the results.
 
 The data we used is from: https://www.kaggle.com/datasets/slappdun/35000-age-of-empires-2-1v1-ranked-random-matches
 
@@ -14,8 +14,8 @@ Our app can also be used to see a list of the best civilizations in a specific m
 
 ## Installation
 1. Clone the repository
-2. Install virtual environment [pip3 install virtualenv]
-3. Setup virtual environment [python -m venv venv]
-4. Activate virtual environment [venv\Scripts\activate]
-5. Install requirements [pip install -r requirements.txt]
-6. Launch app [python app.py]
+2. Install virtual environment `pip3 install virtualenv`
+3. Setup virtual environment `python -m venv venv`
+4. Activate virtual environment `venv\Scripts\activate`
+5. Install requirements `pip install -r requirements.txt`
+6. Launch app `python app.py`
