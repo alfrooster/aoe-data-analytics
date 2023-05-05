@@ -63,11 +63,13 @@ table.dataframe th {
   display: flex;
   flex-grow: 1;
 }
-.button-reset {
+.button-submit {
   flex-grow: 2;
   margin-left: 0.5em;
+  background-color: #e9a523;
+  border-color: #e9a523;
 }
-.button-submit {
+.button-reset {
   flex-grow: 2;
 }
 #duration {
